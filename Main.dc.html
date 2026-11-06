@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zedu homepage</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./assets/d4974a3ffa463f859d1d1648eab78d84.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#7141F8}a:hover{color:#303073}
+*{box-sizing:border-box}
+.zp-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:999px;background:#7141F8;color:#fff;font-size:16px;text-decoration:none}
+.zp-btn:hover{color:#fff;background:#5a2ee0}
+.zp-out{background:transparent;color:#4A4AAF;box-shadow:inset 0 0 0 1px #7141F8}
+.zp-out:hover{color:#fff}
+.zs-hero{padding-top:44px}
+</style>
+</helmet>
+<div class="zedu-marketing" style="width: 100%; font-family: Lato, sans-serif; color: #17173b; background: #fff; overflow-x: hidden">
+
+<section class="zs-hero">
+  <span class="zs-hero-glow" aria-hidden="true"></span>
+  <div class="zs-desk zs-hero-field" aria-hidden="true"><div class="zs-desk-plane">
+    <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="8">
+      <span class="{{ b.cls }}" style="{{ b.style }}"><i class="{{ b.marks }}"></i></span>
+    </sc-for>
+  </div></div>
+  <canvas class="zs-ring" aria-hidden="true"></canvas>
+
+  <div class="zs-hero-copy">
+    <h1>Where learning communities <span>come together.</span></h1>
+    <div class="zs-hero-action">
+      <p>Bring your cohorts, conversations, classes and collaboration into one connected workspace, built around how people actually learn.</p>
+      <div>
+        <a class="zp-btn" href="https://zedu.chat/auth/sign-up">Try for free</a>
+        <a class="zp-btn zp-out" href="https://zedu.chat/contact-sales">Contact sales</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="zs-demo">
+    <div class="zs-week">
+      <p class="zs-week-title"><b>Cohort 7</b><span>Week 4</span></p>
+      <div class="zs-days" role="group" aria-label="Days of the week">
+        <span class="zs-rail" aria-hidden="true"><span class="zs-rail-ball" style="{{ ballStyle }}"></span></span>
+        <sc-for list="{{ days }}" as="d" hint-placeholder-count="5">
+          <button type="button" class="{{ d.cls }}" onClick="{{ d.pick }}"><b>{{ d.day }}</b><span>{{ d.label }}</span></button>
+        </sc-for>
+      </div>
+      <button type="button" class="zs-playback" onClick="{{ toggle }}" aria-label="{{ playLabel }}">
+        <sc-if value="{{ playing }}" hint-placeholder-val="{{ true }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 5v14M16 5v14"></path></svg>
+        </sc-if>
+        <sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l13 8-13 8z"></path></svg>
+        </sc-if>
+      </button>
+    </div>
+
+    <div class="zs-window">
+      <div class="zs-topbar">
+        <span class="zs-org"><span>C</span>Cohort 7 Academy</span>
+        <span class="zs-search">Search messages, files and people</span>
+        <span class="zs-credits">483 AI Credits</span>
+      </div>
+      <div class="zs-app">
+        <nav class="zs-nav" aria-hidden="true">
+          <span class="is-active">Home</span><span>DMs</span><span>People</span><span>Files</span><span>Buzz</span>
+        </nav>
+        <aside class="zs-side" aria-hidden="true">
+          <div class="zs-side-head">Frontend Cohort 7</div>
+          <small>Week 4</small>
+          <sc-for list="{{ channels }}" as="c" hint-placeholder-count="5">
+            <span class="{{ c.cls }}"># {{ c.name }}</span>
+          </sc-for>
+          <small>Direct messages</small>
+          <span class="zs-side-dm"><span class="zs-avatar zs-avatar-sm" style="background: #7141F8">AO</span>Amara Okafor</span>
+          <span class="zs-side-dm"><span class="zs-avatar zs-avatar-sm" style="background: #1F7F7F">TB</span>Tunde Bakare</span>
+        </aside>
+        <div class="zs-main">
+          <header class="zs-channel"><strong># {{ channel }}</strong><span>{{ topic }}</span><em>42</em></header>
+          <div class="zs-feed">
+            <sc-for list="{{ feed }}" as="m" hint-placeholder-count="3">
+              <div class="zs-msg">
+                <span class="zs-avatar" style="{{ m.tone }}"><sc-if value="{{ m.human }}" hint-placeholder-val="{{ true }}">{{ m.initials }}</sc-if><sc-if value="{{ m.isAi }}" hint-placeholder-val="{{ false }}"><span class="zs-ai-mark"></span></sc-if></span>
+                <div class="zs-msg-body">
+                  <div class="zs-msg-head"><strong>{{ m.name }}</strong><span class="{{ m.roleCls }}">{{ m.role }}</span><time>{{ m.time }}</time></div>
+                  <sc-if value="{{ m.text }}" hint-placeholder-val="{{ true }}"><p>{{ m.text }}</p></sc-if>
+                  <sc-if value="{{ m.bullets }}" hint-placeholder-val="{{ false }}"><ul><sc-for list="{{ m.bullets }}" as="b" hint-placeholder-count="3"><li>{{ b }}</li></sc-for></ul></sc-if>
+                  <sc-if value="{{ m.source }}" hint-placeholder-val="{{ false }}"><span class="zs-source">{{ m.source }}</span></sc-if>
+                  <sc-if value="{{ m.file }}" hint-placeholder-val="{{ false }}"><span class="zs-file"><span><b>{{ m.file.name }}</b><small>{{ m.file.meta }}</small></span></span></sc-if>
+                  <sc-if value="{{ m.live }}" hint-placeholder-val="{{ false }}"><span class="zs-live-card"><span><b>State in React</b><small>Buzz started in this channel</small></span><span class="zs-live-join">Join</span></span></sc-if>
+                  <sc-if value="{{ m.meta }}" hint-placeholder-val="{{ false }}"><div class="zs-msg-meta"><sc-if value="{{ m.reactions }}" hint-placeholder-val="{{ false }}"><span class="zs-reaction">+{{ m.reactions }}</span></sc-if><sc-if value="{{ m.replies }}" hint-placeholder-val="{{ false }}"><span class="zs-replies">{{ m.replies }}</span></sc-if></div></sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div class="zs-compose-wrap">
+            <span class="zs-typing is-on"><sc-if value="{{ typingName }}" hint-placeholder-val="{{ false }}"><i></i><i></i><i></i>{{ typingName }} is typing</sc-if></span>
+            <div class="zs-compose">Message #{{ channel }}</div>
+          </div>
+        </div>
+        <aside class="{{ panelCls }}">
+          <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+            <div class="zs-panel-inner">
+              <header><strong>{{ panelTitle }}</strong></header>
+              <sc-for list="{{ thread }}" as="m" hint-placeholder-count="2">
+                <div class="zs-msg">
+                  <span class="zs-avatar" style="{{ m.tone }}">{{ m.initials }}</span>
+                  <div class="zs-msg-body">
+                    <div class="zs-msg-head"><strong>{{ m.name }}</strong><span class="{{ m.roleCls }}">{{ m.role }}</span><time>{{ m.time }}</time></div>
+                    <p>{{ m.text }}</p>
+                  </div>
+                </div>
+              </sc-for>
+              <sc-if value="{{ panelBuzz }}" hint-placeholder-val="{{ false }}">
+                <div class="zs-buzz">
+                  <div class="zs-board" aria-hidden="true">
+                    <svg viewBox="0 0 260 150" fill="none"><rect class="zs-ink" x="92" y="12" width="76" height="30" rx="7"></rect><rect class="zs-ink" x="22" y="100" width="76" height="30" rx="7"></rect><rect class="zs-ink" x="162" y="100" width="76" height="30" rx="7"></rect><path class="zs-ink zs-ink-2" d="M130 42 C130 72 60 70 60 100"></path><path class="zs-ink zs-ink-2" d="M130 42 C130 72 200 70 200 100"></path><text x="130" y="31" text-anchor="middle">state</text><text x="60" y="119" text-anchor="middle">props</text><text x="200" y="119" text-anchor="middle">props</text></svg>
+                    <span>Whiteboard</span>
+                  </div>
+                  <div class="zs-tiles">
+                    <div class="zs-tile zs-tile-active"><span class="zs-avatar" style="background: #7141F8">AO</span><small>Amara</small></div>
+                    <div class="zs-tile"><span class="zs-avatar" style="background: #1F7F7F">TB</span><small>Tunde</small></div>
+                    <div class="zs-tile"><span class="zs-avatar" style="background: #3E3E93">ZB</span><small>Zainab</small></div>
+                    <div class="zs-tile"><span class="zs-avatar" style="background: #B5470F">KE</span><small>Kelechi</small></div>
+                  </div>
+                  <div class="zs-buzz-bar"><span class="zs-rec">Recording</span><span>38 in class</span></div>
+                </div>
+              </sc-if>
+              <sc-for list="{{ saved }}" as="f" hint-placeholder-count="3">
+                <span class="zs-saved"><span aria-hidden="true">+</span><span><b>{{ f.name }}</b><small>{{ f.meta }}</small></span></span>
+              </sc-for>
+            </div>
+          </sc-if>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="zs-proof">
+    <p><b>4.9</b> Trusted by most modern educators and learners worldwide</p>
+    <dl>
+      <div><dt>10,000+</dt><dd>Learners supported</dd></div>
+      <div><dt>15,000+</dt><dd>Conversations powered by AI</dd></div>
+      <div><dt>98%</dt><dd>Educator satisfaction</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="zs-story">
+  <div class="zs-copy">
+    <p class="zs-kicker">Organized Channels</p>
+    <h2>Every cohort gets its own organised space.</h2>
+    <p>Create subject-based spaces for every cohort. Keep discussions focused, announcements clear, and conversations threaded so nothing gets lost.</p>
+  </div>
+  <div class="zs-spaces">
+    <sc-for list="{{ cohorts }}" as="c" hint-placeholder-count="3">
+      <button type="button" class="{{ c.cls }}" onClick="{{ c.pick }}">
+        <span class="zs-space-head"><b>{{ c.name }}</b><small>{{ c.members }}</small></span>
+        <sc-for list="{{ c.rows }}" as="r" hint-placeholder-count="3">
+          <span class="zs-space-row"><span># {{ r.name }}</span><em>{{ r.rule }}</em></span>
+        </sc-for>
+      </button>
+    </sc-for>
+  </div>
+</section>
+
+<section class="zs-story zs-story-dark">
+  <div class="zs-live-stage">
+    <div class="zs-buzz">
+      <div class="zs-board" aria-hidden="true">
+        <svg viewBox="0 0 260 150" fill="none"><rect class="zs-ink" x="92" y="12" width="76" height="30" rx="7"></rect><rect class="zs-ink" x="22" y="100" width="76" height="30" rx="7"></rect><rect class="zs-ink" x="162" y="100" width="76" height="30" rx="7"></rect><path class="zs-ink zs-ink-2" d="M130 42 C130 72 60 70 60 100"></path><path class="zs-ink zs-ink-2" d="M130 42 C130 72 200 70 200 100"></path><text x="130" y="31" text-anchor="middle">state</text><text x="60" y="119" text-anchor="middle">props</text><text x="200" y="119" text-anchor="middle">props</text></svg>
+        <span>Whiteboard</span>
+      </div>
+      <div class="zs-tiles">
+        <div class="zs-tile zs-tile-active"><span class="zs-avatar" style="background: #7141F8">AO</span><small>Amara</small></div>
+        <div class="zs-tile"><span class="zs-avatar" style="background: #1F7F7F">TB</span><small>Tunde</small></div>
+        <div class="zs-tile"><span class="zs-avatar" style="background: #3E3E93">ZB</span><small>Zainab</small></div>
+        <div class="zs-tile"><span class="zs-avatar" style="background: #B5470F">KE</span><small>Kelechi</small></div>
+      </div>
+      <div class="zs-buzz-bar"><span class="zs-rec">Recording</span><span>38 in class</span></div>
+    </div>
+  </div>
+  <div class="zs-copy">
+    <p class="zs-kicker">Calls &amp; Collaboration</p>
+    <h2>The class happens where the conversation is.</h2>
+    <p>Work across languages, time zones, and regions with chats, docs, and meetings in one place and bridge every gap with real-time collaboration tools.</p>
+  </div>
+</section>
+
+<section class="zs-story">
+  <div class="zs-copy">
+    <p class="zs-kicker">Cohort Communication</p>
+    <h2>Feedback stays with the work.</h2>
+    <p>Manage bootcamps, classes, and learning groups with clearly defined communication spaces. Keep educators aligned and learners informed in real time.</p>
+  </div>
+  <div class="zs-feedback">
+    <div class="zs-msg"><span class="zs-avatar" style="background: #4A4AAF">FA</span><div class="zs-msg-body"><div class="zs-msg-head"><strong>Funmi Adeyemi</strong><span class="zs-role">Learner</span><time>3:12 PM</time></div><p>Here's my task board draft. I'm unsure about how I've split the state.</p><span class="zs-file"><span><b>task-board-draft.zip</b><small>ZIP, 4.8 MB</small></span></span></div></div>
+    <div class="zs-feedback-reply"><div class="zs-msg"><span class="zs-avatar" style="background: #1F7F7F">TB</span><div class="zs-msg-body"><div class="zs-msg-head"><strong>Tunde Bakare</strong><span class="zs-role zs-role-tunde">Mentor</span><time>4:06 PM</time></div><p>Good structure. Lift the filter state into TaskBoard, then both lists can share it.</p></div></div></div>
+    <div class="zs-feedback-reply"><div class="zs-msg"><span class="zs-avatar" style="background: #7141F8">AO</span><div class="zs-msg-body"><div class="zs-msg-head"><strong>Amara Okafor</strong><span class="zs-role zs-role-amara">Instructor</span><time>5:20 PM</time></div><p>Agreed. Funmi, that's a good pattern to show on Monday.</p></div></div></div>
+  </div>
+</section>
+
+<section class="zs-story">
+  <div class="zs-routes">
+    <div class="zs-route"><p>When is Assignment 2 due?</p><div><span class="zs-route-ai"></span><span><b>Answered by the Course Assistant</b><small>Monday, from the Week 4 brief</small></span></div></div>
+    <div class="zs-route"><p>Which slide explains React.memo?</p><div><span class="zs-route-ai"></span><span><b>Answered by the Course Assistant</b><small>Slide 14, Week-4-state.pdf</small></span></div></div>
+    <div class="zs-route"><p>I'm falling behind. Can we talk about my progress?</p><div class="is-human"><span class="zs-avatar zs-avatar-sm" style="background: #1F7F7F">TB</span><span><b>For your mentor</b><small>Tunde handles this one personally</small></span></div></div>
+  </div>
+  <div class="zs-copy">
+    <p class="zs-kicker">AI Agents</p>
+    <h2>AI takes the routine. Educators keep the teaching.</h2>
+    <p>Deploy intelligent assistants that automate routine tasks, support learners instantly, and keep educators focused on what truly matters - teaching.</p>
+  </div>
+</section>
+
+<section class="zs-toolbench">
+  <div class="zs-toolbench-head">
+    <div>
+      <h2>All Your Learning Tools.<span>One Simple Subscription</span></h2>
+      <p>Replace disconnected learning tools with one seamless platform</p>
+    </div>
+    <a class="zp-btn" href="https://zedu.chat/auth/sign-up">Get started for free</a>
+  </div>
+  <div class="zs-tools">
+    <div class="zs-desk" aria-hidden="true"><div class="zs-desk-plane">
+      <sc-for list="{{ toolBlocks }}" as="b" hint-placeholder-count="8">
+        <span class="{{ b.cls }}" style="{{ b.style }}" onMouseEnter="{{ b.pick }}"><i class="{{ b.marks }}"></i></span>
+      </sc-for>
+    </div></div>
+    <span aria-hidden="true"></span>
+    <ul class="zs-tool-list">
+      <sc-for list="{{ tools }}" as="t" hint-placeholder-count="8">
+        <li>
+          <button type="button" class="{{ t.cls }}" onClick="{{ t.pick }}" onMouseEnter="{{ t.pick }}">{{ t.title }}</button>
+          <sc-if value="{{ t.on }}" hint-placeholder-val="{{ false }}"><p>{{ t.text }}</p></sc-if>
+        </li>
+      </sc-for>
+    </ul>
+  </div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4300}}'>
+const PEOPLE = {
+  amara: { name: 'Amara Okafor', initials: 'AO', role: 'Instructor', tone: '#7141F8' },
+  tunde: { name: 'Tunde Bakare', initials: 'TB', role: 'Mentor', tone: '#1F7F7F' },
+  zainab: { name: 'Zainab Bello', initials: 'ZB', role: 'Learner', tone: '#3E3E93' },
+  kelechi: { name: 'Kelechi Eze', initials: 'KE', role: 'Learner', tone: '#B5470F' },
+  funmi: { name: 'Funmi Adeyemi', initials: 'FA', role: 'Learner', tone: '#4A4AAF' },
+  ai: { name: 'Course Assistant', initials: 'AI', role: 'AI assistant', tone: '#7141F8' }
+};
+const CHANNELS = ['announcements', 'week-4-questions', 'assignment-2', 'live-classes', 'resources'];
+const SCENES = [
+  { day: 'Mon', label: 'Announce', channel: 'announcements', topic: 'Only instructors can post here', panel: null, messages: [
+    { id: 'm1', who: 'amara', time: '9:02 AM', text: "Good morning, Cohort 7. Week 4 starts today: we move from components to state. Please read the brief before Wednesday's live class.", file: { name: 'Week-4-brief.pdf', meta: 'PDF, 1.2 MB' }, reactions: 24 },
+    { id: 'm2', who: 'tunde', time: '9:06 AM', text: 'Office hours move to Thursday, 4 PM. Bring your Assignment 2 drafts.', reactions: 11 },
+    { id: 'm3', who: 'ai', time: '9:07 AM', text: 'Reminder set for everyone in Cohort 7: live class, Wednesday at 6 PM.' } ] },
+  { day: 'Tue', label: 'Ask', channel: 'week-4-questions', topic: "Ask anything about this week's lessons", messages: [
+    { id: 't1', who: 'zainab', time: '7:41 PM', text: "Why does my component re-render when the parent's state changes? Its props stayed the same.", replies: '2 replies' },
+    { id: 't2', who: 'ai', time: '7:41 PM', text: 'A child re-renders with its parent by default, even when its props are the same. React.memo skips that render.', source: 'From Week-4-state.pdf, slide 14' },
+    { id: 't3', who: 'amara', time: '7:58 PM', text: "Good answer. We'll work through Zainab's example together tomorrow.", reactions: 9 } ],
+    panel: { kind: 'thread', title: 'Thread', after: 3, items: [
+      { id: 'r1', who: 'kelechi', time: '8:02 PM', text: 'I hit this too. Wrapping the list item in memo fixed it.' },
+      { id: 'r2', who: 'zainab', time: '8:05 PM', text: 'That worked. The extra renders are gone, thank you both.' } ] } },
+  { day: 'Wed', label: 'Live class', channel: 'live-classes', topic: 'Live class, Wednesdays at 6 PM', messages: [
+    { id: 'w1', who: 'amara', time: '6:00 PM', live: true },
+    { id: 'w2', who: 'kelechi', time: '6:24 PM', text: 'Could we go over the second example again?' },
+    { id: 'w3', who: 'amara', time: '6:25 PM', text: 'Of course. Back to the whiteboard.' } ],
+    panel: { kind: 'buzz', title: 'Week 4 live class', after: 1, items: [] } },
+  { day: 'Thu', label: 'Feedback', channel: 'assignment-2', topic: 'Drafts and mentor feedback', messages: [
+    { id: 'h1', who: 'funmi', time: '3:12 PM', text: "Here's my draft of the task board. I'm not sure about how I've split the state.", file: { name: 'task-board-draft.zip', meta: 'ZIP, 4.8 MB' }, replies: '3 replies' } ],
+    panel: { kind: 'thread', title: 'Thread', after: 1, items: [
+      { id: 'r3', who: 'tunde', time: '4:06 PM', text: 'Good structure, Funmi. Lift the filter state into TaskBoard, then both lists can share it.' },
+      { id: 'r4', who: 'funmi', time: '4:31 PM', text: 'Done, and it removed a whole effect. Pushing the update now.' },
+      { id: 'r5', who: 'tunde', time: '4:33 PM', text: "That's the idea. Ready for Amara's review." } ] } },
+  { day: 'Fri', label: 'Recap', channel: 'week-4-questions', topic: "Ask anything about this week's lessons", messages: [
+    { id: 'f1', who: 'ai', time: '5:00 PM', text: "Here's your Week 4 summary from this channel and Wednesday's class:", bullets: ['Children re-render with their parent unless memoised', 'Keep state in the closest shared parent', 'Assignment 2 is due Monday'] },
+    { id: 'f2', who: 'amara', time: '5:12 PM', text: 'Thanks, everyone. A strong week. See you on Monday for Week 5.', reactions: 31 } ],
+    panel: { kind: 'files', title: 'Saved to #resources', after: 1, items: [
+      { name: 'Week 4 class recording', meta: 'Recording, 1 hr 12 min' },
+      { name: 'Week 4 AI class notes', meta: 'Notes, 6 pages' },
+      { name: 'Week-4-state.pdf', meta: 'PDF, 3.4 MB' } ] } }
+];
+const TILES = [['zs-t-message', 'lines'], ['zs-t-live', 'screen'], ['zs-t-story', 'frames'], ['zs-t-record', 'play'], ['zs-t-mesh', 'dots'], ['zs-t-files', 'tabs'], ['zs-t-board', 'curve'], ['zs-t-notes', 'lines']];
+const TOOLS = [
+  ['Messaging System', 'Secure, encrypted-in-transit messaging for academic collaboration, where students and educators connect and learn together.'],
+  ['Live Teaching', 'Your digital classroom for meetings and empowering structured discussions, real-time collaboration, and smarter academic engagement'],
+  ['Storyboard', 'Transforming learning into visual journeys, making complex concepts simple, engaging, and memorable for students.'],
+  ['Class Recordings', 'Revisit, review, and reinforce your learning anytime. Access lessons, clarify concepts, and strengthen understanding anytime.'],
+  ['Conversation Mesh', 'An interconnected learning space where dialogue builds shared knowledge and continuous growth.'],
+  ['File Management', 'Organize, share, and instantly access all your learning resources in one secure, centralized hub reduces clutter, and keeps every class connected.'],
+  ['Whiteboard', 'Interactive visual canvas for real-time sketching, brainstorming, and collaborative ideation.'],
+  ['AI class notes', 'Simplifying complex concepts, empowering students to learn, explore, and master artificial intelligence with practical understanding.']
+];
+const COHORTS = [
+  { name: 'Frontend Cohort 7', members: '42 learners', rows: [{ name: 'announcements', rule: 'Instructors post' }, { name: 'week-4-questions', rule: 'Everyone' }, { name: 'assignment-2', rule: 'Everyone' }] },
+  { name: 'Data Analytics Cohort 3', members: '86 learners', rows: [{ name: 'announcements', rule: 'Instructors post' }, { name: 'sql-clinic', rule: 'Everyone' }, { name: 'mentors-only', rule: 'Private' }] },
+  { name: 'Product Design Cohort 2', members: '28 learners', rows: [{ name: 'announcements', rule: 'Instructors post' }, { name: 'critique', rule: 'Everyone' }, { name: 'portfolio-reviews', rule: 'Mentors moderate' }] }
+];
+const beatsOf = (s) => Math.max(s.messages.length, s.panel ? s.panel.after + s.panel.items.length : 0);
+const decorate = (m) => {
+  const p = PEOPLE[m.who];
+  return { ...m, name: p.name, initials: p.initials, role: p.role, tone: 'background: ' + p.tone, roleCls: 'zs-role zs-role-' + m.who, human: m.who !== 'ai', isAi: m.who === 'ai', meta: !!(m.reactions || m.replies) };
+};
+
+class Component extends DCLogic {
+  state = { scene: 0, beat: 1, typing: false, playing: true, cohort: 0, tool: 0 };
+
+  componentDidMount() {
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.reduced) this.setState({ playing: false, beat: 99 });
+    else this.schedule();
+    this.startRing();
+  }
+
+  componentDidUpdate(prev, prevState) {
+    if (this.reduced) return;
+    const s = this.state;
+    if (prevState.scene !== s.scene || prevState.beat !== s.beat || prevState.playing !== s.playing) this.schedule();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+    cancelAnimationFrame(this.frame);
+  }
+
+  
+
+schedule() {
+  clearTimeout(this.timer);
+
+  if (!this.state.playing) return;
+
+  this.timer = setTimeout(() => {
+    const nextScene = (this.state.scene + 1) % SCENES.length;
+
+    this.setState({
+      scene: nextScene,
+      beat: 1,
+      typing: false
+    }, () => {
+      this.schedule();
+    });
+  }, 5000);
+}
+
+
+
+  startRing() {
+    const canvas = document.querySelector('.zs-ring');
+    if (!canvas) { setTimeout(() => this.startRing(), 200); return; }
+    const ctx = canvas.getContext('2d');
+    const TX = 1.02, TZ = 0.56, R = 1, r = 0.4;
+    const rot = (x, y, z) => {
+      const y1 = y * Math.cos(TX) - z * Math.sin(TX), z1 = y * Math.sin(TX) + z * Math.cos(TX);
+      return [x * Math.cos(TZ) - y1 * Math.sin(TZ), x * Math.sin(TZ) + y1 * Math.cos(TZ), z1];
+    };
+    const pt = (u, v) => { const k = R + r * Math.cos(v); return rot(k * Math.cos(u), k * Math.sin(u), r * Math.sin(v)); };
+    const draw = (t) => {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth, h = canvas.clientHeight;
+      if (canvas.width !== w * ratio) { canvas.width = w * ratio; canvas.height = h * ratio; }
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      const s = Math.min(w, h) * 0.33, flow = t * 0.00006, P = (p) => [w / 2 + p[0] * s, h / 2 + p[1] * s, p[2]];
+      const b = [[], [], []];
+      for (let i = 0; i < 54; i++) for (let j = 0; j < 16; j++) {
+        const u0 = i / 54 * 6.2832 + flow, u1 = (i + 1) / 54 * 6.2832 + flow, v0 = j / 16 * 6.2832, v1 = (j + 1) / 16 * 6.2832;
+        const A = P(pt(u0, v0)), B = P(pt(u1, v0)), C = P(pt(u0, v1)), D = P(pt(u1, v1));
+        const k = Math.max(0, Math.min(2, Math.floor((A[2] + 1.3) / 0.9)));
+        b[k].push([A, B], [A, C], [A, D]);
+      }
+      ctx.lineWidth = 0.7;
+      b.forEach((lines, k) => {
+        ctx.strokeStyle = 'rgba(141,103,250,' + (0.1 + k * 0.13) + ')';
+        ctx.beginPath();
+        lines.forEach((l) => { ctx.moveTo(l[0][0], l[0][1]); ctx.lineTo(l[1][0], l[1][1]); });
+        ctx.stroke();
+      });
+      for (let i = 0; i < 90; i++) {
+        const u = i * 2.4 + t * 0.000006 * (1 + i % 4), sp = 1.42 + (i * 0.37 % 1) * 0.52, q = P(rot(sp * Math.cos(u), sp * Math.sin(u), ((i * 0.61 % 1) - 0.5) * 0.7));
+        ctx.fillStyle = 'rgba(113,65,248,.34)';
+        ctx.beginPath(); ctx.arc(q[0], q[1], 0.8 + (i * 0.73 % 1) * 1.4, 0, 6.2832); ctx.fill();
+      }
+      const o = 4.4 + t * 0.00016, q = P(rot((R + r) * Math.cos(o), (R + r) * Math.sin(o), r * 1.1)), rad = s * 0.11;
+      const g = ctx.createRadialGradient(q[0] + rad * 0.4, q[1] - rad * 0.5, rad * 0.1, q[0], q[1], rad);
+      g.addColorStop(0, '#C58BFF'); g.addColorStop(0.55, '#7141F8'); g.addColorStop(1, '#4F2FC4');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], rad, 0, 6.2832); ctx.fill();
+    };
+    let last = 0;
+    const loop = (t) => {
+      this.frame = requestAnimationFrame(loop);
+      if (t - last < 33) return;
+      last = t; draw(t);
+    };
+    if (this.reduced) draw(0); else this.frame = requestAnimationFrame(loop);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const scene = SCENES[s.scene];
+    const beats = beatsOf(scene);
+    const beat = Math.min(s.beat, beats);
+    const panel = scene.panel;
+    const open = !!panel && beat >= panel.after;
+    const next = s.typing ? (scene.messages[beat] || (panel && panel.kind === 'thread' ? panel.items[beat - panel.after] : null)) : null;
+    const blockList = (active, pick) => TILES.map((t, i) => ({
+      cls: 'zs-block ' + t[0] + (i === active ? ' is-lifted' : ''),
+      marks: 'zs-marks zs-marks-' + t[1],
+      style: 'animation-delay: ' + (i * -1.3) + 's',
+      pick: pick ? () => pick(i) : undefined
+    }));
+    return {
+      blocks: blockList(-1),
+      toolBlocks: blockList(s.tool, (i) => this.setState({ tool: i })),
+      ballStyle: 'left: ' + s.scene * 25 + '%; transition: left 5000ms ease-in-out',
+      days: SCENES.map((d, i) => ({ day: d.day, label: d.label, cls: 'zs-day' + (i === s.scene ? ' is-active' : ''), pick: () => this.setState({ scene: i, beat: this.reduced ? 99 : 1, playing: false }) })),
+      playing: s.playing,
+      paused: !s.playing,
+      playLabel: s.playing ? 'Pause the demo' : 'Play the demo',
+      toggle: () => this.setState({ playing: !s.playing }),
+      channels: CHANNELS.map((c) => ({ name: c, cls: c === scene.channel ? 'is-active' : '' })),
+      channel: scene.channel,
+      topic: scene.topic,
+      feed: scene.messages.slice(0, beat).map(decorate),
+      typingName: next ? PEOPLE[next.who].name : '',
+      panelCls: 'zs-panel' + (open ? ' is-open' : ''),
+      panelOpen: open,
+      panelTitle: panel ? panel.title : '',
+      panelBuzz: open && panel.kind === 'buzz',
+      thread: open && panel.kind === 'thread' ? panel.items.slice(0, beat - panel.after).map(decorate) : [],
+      saved: open && panel.kind === 'files' ? panel.items : [],
+      cohorts: COHORTS.map((c, i) => ({ ...c, cls: 'zs-space zs-depth-' + ((i - s.cohort + 3) % 3), pick: () => this.setState({ cohort: i }) })),
+      tools: TOOLS.map((t, i) => ({ title: t[0], text: t[1], on: i === s.tool, cls: i === s.tool ? 'is-active' : '', pick: () => this.setState({ tool: i }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>
